@@ -31,15 +31,7 @@ This project is a **real-world implementation of autonomous agents and AI workfl
 
 ---
 
-## 🧠 Core AI Workflow
-
-```mermaid
-flowchart TD
-    A[User Uploads Resume] --> B[Resume Parser Agent]
-    B --> C[Job Scraper Agent]
-    C --> D[Skill Matcher Agent]
-    D --> E[Cover Letter Generator Agent]
-    E --> F[Application Tracker + Dashboard]
+<pre lang="markdown"> ### 🧠 Core AI Workflow ```mermaid flowchart TD A[User Uploads Resume] --> B[Resume Parser Agent] B --> C[Job Scraper Agent] C --> D[Skill Matcher Agent] D --> E[Cover Letter Generator Agent] E --> F[Application Tracker & Dashboard] ``` Each step above represents an **autonomous LangChain agent**, coordinated through **LangGraph** for robust, memory-aware task orchestration. </pre>
 
 
 Each node is an autonomous LangChain agent, orchestrated using LangGraph to ensure smooth task transitions, memory sharing, and error handling.
