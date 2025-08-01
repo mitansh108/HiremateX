@@ -1,42 +1,59 @@
-#  HireMateX – Full-Stack SaaS for AI-Powered Job Applications  
-**Status:** In Development  
-**Date Started:** July 2025
+# 🤖 HireMateX – AI Agent-Powered Job Application Automation (SaaS)  
+**Status:** 🚧 In Development | **Started:** July 2025  
 
-HireMateX is a full-stack SaaS platform designed to automate and optimize the job application process using AI-powered workflows, skill matching, and personalized content generation. It empowers job seekers to streamline applications, improve targeting, and track everything in one place.
-
----
-
-## 🧠 Features
-
-- 🔍 **Job Scraping & Parsing**  
-  Automates job extraction from various portals and parses role-specific keywords using LangGraph agents.
-
-- 📝 **Resume Intelligence**  
-  Parses PDFs and extracts structured information to match with job descriptions.
-
-- 🎯 **AI Skill Matching (92%+ accuracy)**  
-  Matches candidate skills to job requirements using LLM-based reasoning powered by Groq and LLaMA.
-
-- ✉️ **Automated Cover Letter Generation**  
-  Crafts personalized cover letters and outreach content tailored to each application.
-
-- 📊 **Dashboard & Application Tracker**  
-  View application status, progress, AI match scores, and personalized tips.
-
-- 💳 **Credit-Based Billing System**  
-  Seamless Stripe integration enables pay-as-you-go billing and real-time credit usage tracking.
+**HireMateX** is an intelligent SaaS platform that automates the *entire job application process* using a coordinated system of AI agents. At its core, it leverages **LangGraph** and **LangChain** to orchestrate powerful workflows—turning resume parsing, job scraping, skill matching, and content generation into a fully autonomous pipeline.
 
 ---
 
-## ⚙️ Tech Stack
+## 🌐 What Makes HireMateX Different?
 
-| Layer        | Technologies Used                                      |
-|--------------|---------------------------------------------------------|
-| Frontend     | Next.js, React, Tailwind CSS                           |
-| Backend      | FastAPI, Supabase PostgreSQL                           |
-| AI / LLM     | LangChain, LangGraph, Groq, LLaMA                      |
-| Auth / DB    | Supabase Auth, Supabase Storage                        |
-| Payments     | Stripe API                                             |
+While most platforms help manage applications, **HireMateX acts as your AI assistant**, performing end-to-end tasks like:
 
+- 🔍 Scraping job listings based on your profile
+- 🧾 Parsing resumes and extracting structured data
+- 📊 Matching your skills to job descriptions with 92%+ accuracy
+- ✉️ Generating tailored cover letters & emails using Groq + LLaMA APIs
+- 🧠 Executing everything as a **LangGraph-orchestrated agent workflow**
+
+This project is a **real-world implementation of autonomous agents and AI workflow orchestration**—wrapped in a full-stack SaaS product.
 
 ---
+
+## ⚙️ Tech Stack Overview
+
+| Layer              | Tech Used                                                |
+|--------------------|-----------------------------------------------------------|
+| 🔁 AI Workflow Engine | **LangGraph**, **LangChain**, OpenAI, Groq, LLaMA        |
+| 📦 Backend           | FastAPI, Supabase PostgreSQL, PyMuPDF                   |
+| 💻 Frontend          | Next.js, React, Tailwind CSS                            |
+| 🔐 Auth & Storage    | Supabase Auth, Supabase Storage                         |
+| 💳 Billing           | Stripe API (pay-as-you-go credit system)               |
+
+---
+
+## 🧠 Core AI Workflow
+
+```mermaid
+flowchart TD
+    A[User Uploads Resume] --> B[Resume Parser Agent]
+    B --> C[Job Scraper Agent]
+    C --> D[Skill Matcher Agent]
+    D --> E[Cover Letter Generator Agent]
+    E --> F[Application Tracker + Dashboard]
+
+
+Each node is an autonomous LangChain agent, orchestrated using LangGraph to ensure smooth task transitions, memory sharing, and error handling.
+Key Features
+
+✅ Fully automated end-to-end job application pipeline
+📎 Resume parsing with custom extractors
+🔍 Smart job scraping based on preferences
+🤖 Multi-agent orchestration using LangGraph (resume → scrape → match → generate)
+✉️ Personalized content generation (cover letters, outreach emails)
+📊 Application tracking dashboard
+💳 Stripe-powered credit-based billing system
+🚧 Project Status
+
+Core agent workflows are functional and under refinement.
+UI + dashboard features and analytics are actively being built.
+Stripe billing and token metering are live and tested.
