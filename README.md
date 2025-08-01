@@ -37,6 +37,6 @@ HireMateX is a full-stack SaaS platform designed to automate and optimize the jo
 | AI / LLM     | LangChain, LangGraph, Groq, LLaMA                      |
 | Auth / DB    | Supabase Auth, Supabase Storage                        |
 | Payments     | Stripe API                                             |
-| PDF Parsing  | PyMuPDF + Custom Resume Extractors                     |
+
 
 ---
