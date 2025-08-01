@@ -254,7 +254,7 @@ export async function POST(request: NextRequest) {
       const controller = new AbortController()
       const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 second timeout
       
-      const parseResponse = await fetch('http://localhost:8000/parse-resume-comprehensive', {
+      const parseResponse = await fetch(`${process.env.NEXT_PUBLIC_AI_SERVICE_URL || 'http://localhost:8000'}/parse-resume-comprehensive`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

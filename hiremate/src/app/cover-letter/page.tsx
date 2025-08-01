@@ -50,7 +50,7 @@ function CoverLetterContent() {
         throw new Error('User not authenticated')
       }
 
-      const response = await fetch('http://localhost:8000/generate-cover-letter', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_AI_SERVICE_URL || 'http://localhost:8000'}/generate-cover-letter`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

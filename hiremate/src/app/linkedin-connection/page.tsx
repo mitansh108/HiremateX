@@ -46,7 +46,7 @@ export default function LinkedInConnectionPage() {
     try {
       console.log('🤝 Generating LinkedIn connection note...')
       
-      const response = await fetch('http://localhost:8000/generate-linkedin-connection-note', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_AI_SERVICE_URL || 'http://localhost:8000'}/generate-linkedin-connection-note`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -36,7 +36,10 @@ app = FastAPI(
 # Add CORS middleware to allow requests from Next.js frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Your Next.js app
+    allow_origins=[
+        "http://localhost:3000",  # Local development
+        "https://hiremate-68eezfpda-mitansh108s-projects.vercel.app"  # Production
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -708,8 +711,8 @@ async def create_checkout_session(request: dict):
                 'package_name': package["name"]
             },
             mode='payment',
-            success_url='http://localhost:3000/payments?success=true',
-            cancel_url='http://localhost:3000/payments?canceled=true',
+            success_url='https://hiremate-68eezfpda-mitansh108s-projects.vercel.app/payments?success=true',
+            cancel_url='https://hiremate-68eezfpda-mitansh108s-projects.vercel.app/payments?canceled=true',
         )
         
         print(f"✅ Checkout session created: {session.id}")

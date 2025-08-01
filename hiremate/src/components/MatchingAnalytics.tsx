@@ -48,7 +48,7 @@ export default function MatchingAnalytics({ resumeData, jobData }: MatchingAnaly
       console.log('Job Skills:', jobSkills)
       console.log('Resume Skills:', resumeSkills)
 
-      const response = await fetch('http://localhost:8000/skill-match-analysis', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_AI_SERVICE_URL || 'http://localhost:8000'}/skill-match-analysis`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

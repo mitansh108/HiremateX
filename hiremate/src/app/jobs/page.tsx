@@ -118,7 +118,7 @@ export default function JobsPage() {
         const { data: { user } } = await supabase.auth.getUser()
         if (!user) throw new Error('Please sign in to access resume data')
 
-        const response = await fetch('http://localhost:8000/get-parsed-resume', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_AI_SERVICE_URL || 'http://localhost:8000'}/get-parsed-resume`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_id: user.id })
@@ -152,7 +152,7 @@ export default function JobsPage() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) throw new Error('User authentication required for skill analysis')
 
-      const skillMatchResponse = await fetch('http://localhost:8000/skill-match-analysis', {
+      const skillMatchResponse = await fetch(`${process.env.NEXT_PUBLIC_AI_SERVICE_URL || 'http://localhost:8000'}/skill-match-analysis`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -358,7 +358,7 @@ export default function JobsPage() {
       if (!textResponse.ok) throw new Error('Failed to extract text from PDF')
       const { text } = await textResponse.json()
 
-      const parseResponse = await fetch('http://localhost:8000/parse-resume-comprehensive', {
+      const parseResponse = await fetch(`${process.env.NEXT_PUBLIC_AI_SERVICE_URL || 'http://localhost:8000'}/parse-resume-comprehensive`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ resume_id: resumeId, raw_text: text })

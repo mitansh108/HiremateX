@@ -48,7 +48,7 @@ export default function LinkedInDMPage() {
                 throw new Error('User not authenticated')
             }
 
-            const response = await fetch('http://localhost:8000/generate-linkedin-dm', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_AI_SERVICE_URL || 'http://localhost:8000'}/generate-linkedin-dm`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
