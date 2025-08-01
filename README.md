@@ -1,5 +1,5 @@
 # 🤖 HireMateX – AI Agent-Powered Job Application Automation (SaaS)  
-**Status:** 🚧 In Development | **Started:** July 2025  
+**Status:** 🚧 In Development | **Started:** June 2025  
 
 **HireMateX** is an intelligent SaaS platform that automates the *entire job application process* using a coordinated system of AI agents. At its core, it leverages **LangGraph** and **LangChain** to orchestrate powerful workflows—turning resume parsing, job scraping, skill matching, and content generation into a fully autonomous pipeline.
 
