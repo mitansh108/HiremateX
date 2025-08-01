@@ -28,14 +28,7 @@ This project is a **real-world implementation of autonomous agents and AI workfl
 Each node is an autonomous LangChain agent, orchestrated using LangGraph to ensure smooth task transitions, memory sharing, and error handling.
 Key Features
 
-✅ Fully automated end-to-end job application pipeline
-📎 Resume parsing with custom extractors
-🔍 Smart job scraping based on preferences
-🤖 Multi-agent orchestration using LangGraph (resume → scrape → match → generate)
-✉️ Personalized content generation (cover letters, outreach emails)
-📊 Application tracking dashboard
-💳 Stripe-powered credit-based billing system
-🚧 Project Status
+
 
 Core agent workflows are functional and under refinement.
 UI + dashboard features and analytics are actively being built.
