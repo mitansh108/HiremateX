@@ -3,17 +3,18 @@ frontend:
   phases:
     preBuild:
       commands:
+        - cd hiremate
+        - node --version
+        - npm --version
         - npm ci
     build:
       commands:
+        - cd hiremate
         - npm run build
   artifacts:
-    baseDirectory: .next
+    baseDirectory: hiremate/.next
     files:
       - '**/*'
   cache:
     paths:
-      - node_modules/**/*
-  env:
-    variables:
-      AMPLIFY_MONOREPO_APP_ROOT: hiremate
+      - hiremate/node_modules/**/*
