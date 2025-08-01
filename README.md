@@ -19,15 +19,6 @@ This project is a **real-world implementation of autonomous agents and AI workfl
 
 ---
 
-## ⚙️ Tech Stack Overview
-
-| Layer              | Tech Used                                                |
-|--------------------|-----------------------------------------------------------|
-| 🔁 AI Workflow Engine | **LangGraph**, **LangChain**, OpenAI, Groq, LLaMA        |
-| 📦 Backend           | FastAPI, Supabase PostgreSQL, PyMuPDF                   |
-| 💻 Frontend          | Next.js, React, Tailwind CSS                            |
-| 🔐 Auth & Storage    | Supabase Auth, Supabase Storage                         |
-| 💳 Billing           | Stripe API (pay-as-you-go credit system)               |
 
 ---
 
