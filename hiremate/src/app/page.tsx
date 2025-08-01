@@ -2,7 +2,9 @@
 
 import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { motion, useInView, useAnimation, useReducedMotion } from 'framer-motion'
+import { motion, useInView, useAnimation } from 'framer-motion'
+import { GifDemo, ProcessFlow } from '@/components/GifDemo'
+import { ScrollProgress, ProcessSteps } from '@/components/ScrollProgress'
 
 const AnimatedSection = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => {
     const ref = useRef(null)
@@ -48,6 +50,8 @@ const FloatingCard = ({ children, delay = 0 }: { children: React.ReactNode, dela
 export default function Home() {
     return (
         <div className="min-h-screen bg-white overflow-hidden">
+            <ScrollProgress />
+            <ProcessSteps />
             {/* Navigation */}
             <motion.nav
                 initial={{ opacity: 0, y: -20 }}
@@ -63,10 +67,31 @@ export default function Home() {
                             </div>
                             <span className="text-xl font-bold text-gray-900">HiremateX</span>
                         </div>
+
+                        {/* Navigation Menu */}
+                        <div className="hidden md:flex items-center space-x-8">
+                            <a href="#process-section" className="text-gray-600 hover:text-orange-500 transition-colors font-medium">
+                                How It Works
+                            </a>
+                            <a href="#features" className="text-gray-600 hover:text-orange-500 transition-colors font-medium">
+                                Features
+                            </a>
+                            <Link href="/pricing" className="text-gray-600 hover:text-orange-500 transition-colors font-medium">
+                                Pricing
+                            </Link>
+                            <Link href="/about" className="text-gray-600 hover:text-orange-500 transition-colors font-medium">
+                                About
+                            </Link>
+                            <Link href="/contact" className="text-gray-600 hover:text-orange-500 transition-colors font-medium">
+                                Contact
+                            </Link>
+                        </div>
+
                         <div className="flex items-center space-x-4">
                             <Link href="/login" className="text-gray-600 hover:text-orange-500 transition-colors">
                                 Login
                             </Link>
+
                             <Link href="/signup" className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors">
                                 Sign Up
                             </Link>
@@ -76,7 +101,7 @@ export default function Home() {
             </motion.nav>
 
             {/* Hero Section */}
-            <section className="pt-32 pb-20 px-6 relative">
+            <section className="pt-24 pb-12 px-6 relative">
                 {/* Background Elements - Simplified */}
                 <div className="absolute inset-0 overflow-hidden">
                     <div className="absolute top-20 right-10 w-32 h-32 bg-orange-100 rounded-full opacity-20"></div>
@@ -84,14 +109,15 @@ export default function Home() {
                 </div>
 
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="grid lg:grid-cols-2 gap-24 items-center">
                         <motion.div
+                            className="lg:-ml-8"
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
                         >
                             <motion.h1
-                                className="text-4xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight"
+                                className="text-5xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -99,7 +125,7 @@ export default function Home() {
                                 Get Noticed Faster
                             </motion.h1>
                             <motion.p
-                                className="text-2xl lg:text-3xl font-semibold text-orange-500 mb-6"
+                                className="text-3xl lg:text-4xl font-semibold text-orange-500 mb-8"
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.6, delay: 0.5 }}
@@ -107,7 +133,7 @@ export default function Home() {
                                 Others Get Silence, You Get Callbacks
                             </motion.p>
                             <motion.p
-                                className="text-xl text-gray-600 mb-8 leading-relaxed"
+                                className="text-xl lg:text-2xl text-gray-600 mb-12 leading-relaxed max-w-2xl"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -115,7 +141,7 @@ export default function Home() {
                                 While others spend endless hours writing cover letters and outreach messages, you just let our AI take over. We create perfectly customized content that connects your resume to each job opportunity seamlessly.
                             </motion.p>
                             <motion.div
-                                className="flex items-center space-x-4"
+                                className="flex items-center space-x-6"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.6 }}
@@ -126,7 +152,7 @@ export default function Home() {
                                 >
                                     <Link
                                         href="/home"
-                                        className="bg-orange-500 text-white px-8 py-4 rounded-xl hover:bg-orange-600 transition-all duration-300 font-medium text-lg shadow-lg hover:shadow-xl"
+                                        className="bg-orange-500 text-white px-10 py-5 rounded-xl hover:bg-orange-600 transition-all duration-300 font-medium text-xl shadow-lg hover:shadow-xl"
                                     >
                                         Get Started →
                                     </Link>
@@ -135,7 +161,7 @@ export default function Home() {
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
-                                    <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl hover:border-orange-500 hover:text-orange-500 transition-all duration-300 font-medium text-lg">
+                                    <button className="border-2 border-gray-300 text-gray-700 px-10 py-5 rounded-xl hover:border-orange-500 hover:text-orange-500 transition-all duration-300 font-medium text-xl">
                                         Watch Demo
                                     </button>
                                 </motion.div>
@@ -144,35 +170,35 @@ export default function Home() {
 
                         {/* Animated Terminal */}
                         <motion.div
-                            className="relative"
+                            className="relative lg:ml-8"
                             initial={{ opacity: 0, x: 50 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8, delay: 0.3 }}
+                            transition={{ duration: 1, delay: 0.3 }}
                         >
                             <motion.div
-                                className="bg-gray-900 rounded-2xl p-6 shadow-2xl relative overflow-hidden"
+                                className="bg-gray-900 rounded-3xl p-8 shadow-2xl relative overflow-hidden w-full max-w-4xl min-h-[400px]"
                                 whileHover={{ scale: 1.02 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                <div className="flex items-center space-x-2 mb-4">
+                                <div className="flex items-center space-x-4 mb-6">
                                     <motion.div
-                                        className="w-3 h-3 bg-red-500 rounded-full"
+                                        className="w-5 h-5 bg-red-500 rounded-full"
                                         animate={{ opacity: [1, 0.5, 1] }}
                                         transition={{ duration: 2, repeat: Infinity }}
                                     />
                                     <motion.div
-                                        className="w-3 h-3 bg-yellow-500 rounded-full"
+                                        className="w-5 h-5 bg-yellow-500 rounded-full"
                                         animate={{ opacity: [1, 0.5, 1] }}
                                         transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
                                     />
                                     <motion.div
-                                        className="w-3 h-3 bg-green-500 rounded-full"
+                                        className="w-5 h-5 bg-green-500 rounded-full"
                                         animate={{ opacity: [1, 0.5, 1] }}
                                         transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
                                     />
-                                    <span className="text-gray-400 text-sm ml-4">HiremateNANO Terminal</span>
+                                    <span className="text-gray-400 text-lg ml-4 font-medium">HiremateX Terminal</span>
                                 </div>
-                                <div className="font-mono text-sm space-y-2">
+                                <div className="font-mono text-base lg:text-lg space-y-4">
                                     <motion.div
                                         className="text-green-400"
                                         initial={{ opacity: 0, x: -10 }}
@@ -206,14 +232,14 @@ export default function Home() {
                                         ✅ Job extracted successfully!
                                     </motion.div>
                                     <motion.div
-                                        className="text-white space-y-1"
+                                        className="text-white space-y-2 ml-4 my-4"
                                         initial={{ opacity: 0, x: -10 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ duration: 0.5, delay: 3 }}
                                     >
-                                        <div>Role: Senior Software Engineer</div>
-                                        <div>Skills: React, Node.js, Python, AWS</div>
-                                        <div>Experience: 5+ years</div>
+                                        <div className="text-lg">Role: Senior Software Engineer</div>
+                                        <div className="text-lg">Skills: React, Node.js, Python, AWS</div>
+                                        <div className="text-lg">Experience: 5+ years</div>
                                     </motion.div>
                                     <motion.div
                                         className="text-green-400"
@@ -241,6 +267,40 @@ export default function Home() {
                                 </div>
                             </motion.div>
                         </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* How It Works - Process Flow */}
+            <section id="process-section" className="px-6 py-32 bg-gradient-to-b from-gray-50 to-white">
+                <div className="max-w-7xl mx-auto">
+                    <motion.div
+                        className="text-center mb-20"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1 }}
+                        viewport={{ once: true }}
+                    >
+                        <motion.p
+                            className="text-orange-500 font-semibold mb-4 tracking-wide uppercase text-sm"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 2.6, delay: 0.1 }}
+                            viewport={{ once: true }}
+                        >
+                            HOW IT WORKS
+                        </motion.p>
+                        <h2 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">
+                            From Resume to <span className="text-orange-500">Dream Job</span>
+                        </h2>
+                        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                            Our AI-powered platform transforms your job search with a simple 4-step process
+                        </p>
+                    </motion.div>
+
+                    {/* Process Flow with GIFs */}
+                    <div id="upload">
+                        <ProcessFlow />
                     </div>
                 </div>
             </section>
@@ -663,83 +723,260 @@ export default function Home() {
             </AnimatedSection>
 
             {/* User Reviews Section */}
-            <AnimatedSection className="px-6 py-20 bg-white">
-                <div className="max-w-7xl mx-auto">
-                    <motion.div
-                        className="text-center mb-16"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true }}
-                    >
-                        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                            What Our Users Say
-                        </h2>
-                        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                            Join thousands of satisfied job seekers who found their dream jobs with HiremateNANO
-                        </p>
-                    </motion.div>
+            <section className="py-20 bg-white">
+                <motion.div
+                    className="text-center mb-16 px-6"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                >
+                    <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                        What Our Users Say
+                    </h2>
+                    <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                        Real feedback from job seekers who transformed their careers
+                    </p>
+                </motion.div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
+                {/* First Row - Moving Left to Right */}
+                <div className="overflow-hidden mb-8 w-full">
+                    <motion.div
+                        className="flex space-x-6"
+                        animate={{ x: ["-100%", "0%"] }}
+                        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                    >
                         {[
                             {
-                                name: "Sarah Chen",
-                                role: "Software Engineer at Google",
-                                avatar: "SC",
+                                name: "Alex Thompson",
+                                role: "Junior Developer",
+                                avatar: "AT",
                                 rating: 5,
-                                review: "HiremateNANO helped me land my dream job at Google! The AI matching was incredibly accurate and saved me weeks of manual application writing."
+                                review: "Finally got my first dev job after 6 months of searching! The AI helped me write cover letters that actually got responses."
                             },
                             {
-                                name: "Marcus Johnson",
-                                role: "Product Manager at Meta",
-                                avatar: "MJ",
-                                rating: 5,
-                                review: "The resume analysis feature is game-changing. It identified skill gaps I didn't even know I had and helped me tailor my applications perfectly."
+                                name: "Maria Santos",
+                                role: "Marketing Coordinator",
+                                avatar: "MS",
+                                rating: 4,
+                                review: "Used to spend hours customizing each application. Now I just paste the job URL and get personalized content in seconds."
                             },
                             {
-                                name: "Emily Rodriguez",
-                                role: "Data Scientist at Netflix",
-                                avatar: "ER",
+                                name: "David Kim",
+                                role: "Graphic Designer",
+                                avatar: "DK",
                                 rating: 5,
-                                review: "I got 3x more interview calls after using HiremateNANO. The personalized cover letters and LinkedIn messages are incredibly effective."
+                                review: "The job matching feature is spot on. It found opportunities I never would have discovered on my own."
+                            },
+                            {
+                                name: "Jessica Brown",
+                                role: "Sales Associate",
+                                avatar: "JB",
+                                rating: 5,
+                                review: "Went from 2% response rate to 15% after using this tool. The difference is incredible!"
+                            },
+                            {
+                                name: "Mike Chen",
+                                role: "Data Analyst",
+                                avatar: "MC",
+                                rating: 4,
+                                review: "Love how it analyzes my resume and suggests improvements. Got me thinking about skills I didn't even know I had."
+                            },
+                            {
+                                name: "Sarah Wilson",
+                                role: "Customer Support",
+                                avatar: "SW",
+                                rating: 5,
+                                review: "As someone who hates writing, this tool is a lifesaver. The cover letters sound professional and personal."
                             }
-                        ].map((review, index) => (
-                            <FloatingCard key={index} delay={index * 0.1}>
-                                <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full">
-                                    <div className="flex items-center mb-4">
-                                        <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                                            {review.avatar}
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold text-gray-900">{review.name}</h4>
-                                            <p className="text-sm text-gray-600">{review.role}</p>
-                                        </div>
+                        ].concat([
+                            {
+                                name: "Alex Thompson",
+                                role: "Junior Developer",
+                                avatar: "AT",
+                                rating: 5,
+                                review: "Finally got my first dev job after 6 months of searching! The AI helped me write cover letters that actually got responses."
+                            },
+                            {
+                                name: "Maria Santos",
+                                role: "Marketing Coordinator",
+                                avatar: "MS",
+                                rating: 4,
+                                review: "Used to spend hours customizing each application. Now I just paste the job URL and get personalized content in seconds."
+                            },
+                            {
+                                name: "David Kim",
+                                role: "Graphic Designer",
+                                avatar: "DK",
+                                rating: 5,
+                                review: "The job matching feature is spot on. It found opportunities I never would have discovered on my own."
+                            },
+                            {
+                                name: "Jessica Brown",
+                                role: "Sales Associate",
+                                avatar: "JB",
+                                rating: 5,
+                                review: "Went from 2% response rate to 15% after using this tool. The difference is incredible!"
+                            },
+                            {
+                                name: "Mike Chen",
+                                role: "Data Analyst",
+                                avatar: "MC",
+                                rating: 4,
+                                review: "Love how it analyzes my resume and suggests improvements. Got me thinking about skills I didn't even know I had."
+                            },
+                            {
+                                name: "Sarah Wilson",
+                                role: "Customer Support",
+                                avatar: "SW",
+                                rating: 5,
+                                review: "As someone who hates writing, this tool is a lifesaver. The cover letters sound professional and personal."
+                            }
+                        ]).map((review, index) => (
+                            <div key={index} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 min-w-[350px] flex-shrink-0">
+                                <div className="flex items-center mb-4">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold mr-3">
+                                        {review.avatar}
                                     </div>
-                                    <div className="flex mb-4">
-                                        {[...Array(review.rating)].map((_, i) => (
-                                            <motion.svg
-                                                key={i}
-                                                className="w-5 h-5 text-orange-500"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                                initial={{ opacity: 0, scale: 0 }}
-                                                whileInView={{ opacity: 1, scale: 1 }}
-                                                transition={{ duration: 0.3, delay: i * 0.1 }}
-                                                viewport={{ once: true }}
-                                            >
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </motion.svg>
-                                        ))}
+                                    <div>
+                                        <h4 className="font-bold text-gray-900 text-sm">{review.name}</h4>
+                                        <p className="text-xs text-gray-600">{review.role}</p>
                                     </div>
-                                    <p className="text-gray-600 leading-relaxed italic">
-                                        "{review.review}"
-                                    </p>
                                 </div>
-                            </FloatingCard>
+                                <div className="flex mb-3">
+                                    {[...Array(review.rating)].map((_, i) => (
+                                        <svg key={i} className="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                    ))}
+                                </div>
+                                <p className="text-gray-600 text-sm leading-relaxed italic">
+                                    "{review.review}"
+                                </p>
+                            </div>
                         ))}
-                    </div>
+                    </motion.div>
                 </div>
-            </AnimatedSection>
+
+                {/* Second Row - Moving Right to Left */}
+                <div className="overflow-hidden w-full">
+                    <motion.div
+                        className="flex space-x-6"
+                        animate={{ x: ["0%", "-100%"] }}
+                        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                    >
+                        {[
+                            {
+                                name: "Tom Rodriguez",
+                                role: "Project Manager",
+                                avatar: "TR",
+                                rating: 5,
+                                review: "The LinkedIn message templates are gold. I've connected with so many recruiters and hiring managers."
+                            },
+                            {
+                                name: "Lisa Park",
+                                role: "UX Designer",
+                                avatar: "LP",
+                                rating: 4,
+                                review: "Helped me transition from print design to UX. The skill gap analysis was eye-opening."
+                            },
+                            {
+                                name: "James Miller",
+                                role: "Accountant",
+                                avatar: "JM",
+                                rating: 5,
+                                review: "Never thought I'd enjoy job searching, but this tool makes it so much easier. Got 3 interviews this week!"
+                            },
+                            {
+                                name: "Rachel Green",
+                                role: "HR Assistant",
+                                avatar: "RG",
+                                rating: 4,
+                                review: "The resume parsing is incredibly accurate. It picked up skills from my volunteer work that I forgot to highlight."
+                            },
+                            {
+                                name: "Kevin Lee",
+                                role: "Software Tester",
+                                avatar: "KL",
+                                rating: 5,
+                                review: "Switched careers from retail to tech. This tool helped me present my transferable skills perfectly."
+                            },
+                            {
+                                name: "Amanda Davis",
+                                role: "Content Writer",
+                                avatar: "AD",
+                                rating: 5,
+                                review: "As a writer, I was skeptical about AI-generated content. But these cover letters are actually really good!"
+                            }
+                        ].concat([
+                            {
+                                name: "Tom Rodriguez",
+                                role: "Project Manager",
+                                avatar: "TR",
+                                rating: 5,
+                                review: "The LinkedIn message templates are gold. I've connected with so many recruiters and hiring managers."
+                            },
+                            {
+                                name: "Lisa Park",
+                                role: "UX Designer",
+                                avatar: "LP",
+                                rating: 4,
+                                review: "Helped me transition from print design to UX. The skill gap analysis was eye-opening."
+                            },
+                            {
+                                name: "James Miller",
+                                role: "Accountant",
+                                avatar: "JM",
+                                rating: 5,
+                                review: "Never thought I'd enjoy job searching, but this tool makes it so much easier. Got 3 interviews this week!"
+                            },
+                            {
+                                name: "Rachel Green",
+                                role: "HR Assistant",
+                                avatar: "RG",
+                                rating: 4,
+                                review: "The resume parsing is incredibly accurate. It picked up skills from my volunteer work that I forgot to highlight."
+                            },
+                            {
+                                name: "Kevin Lee",
+                                role: "Software Tester",
+                                avatar: "KL",
+                                rating: 5,
+                                review: "Switched careers from retail to tech. This tool helped me present my transferable skills perfectly."
+                            },
+                            {
+                                name: "Amanda Davis",
+                                role: "Content Writer",
+                                avatar: "AD",
+                                rating: 5,
+                                review: "As a writer, I was skeptical about AI-generated content. But these cover letters are actually really good!"
+                            }
+                        ]).map((review, index) => (
+                            <div key={index} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 min-w-[350px] flex-shrink-0">
+                                <div className="flex items-center mb-4">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold mr-3">
+                                        {review.avatar}
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-gray-900 text-sm">{review.name}</h4>
+                                        <p className="text-xs text-gray-600">{review.role}</p>
+                                    </div>
+                                </div>
+                                <div className="flex mb-3">
+                                    {[...Array(review.rating)].map((_, i) => (
+                                        <svg key={i} className="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                    ))}
+                                </div>
+                                <p className="text-gray-600 text-sm leading-relaxed italic">
+                                    "{review.review}"
+                                </p>
+                            </div>
+                        ))}
+                    </motion.div>
+                </div>
+            </section>
 
             {/* FAQ Section */}
             <AnimatedSection className="px-6 py-20 bg-gray-50">
