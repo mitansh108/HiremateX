@@ -3,7 +3,7 @@
  * Handles Stripe payment integration
  */
 
-const AI_SERVICE_URL = process.env.NEXT_PUBLIC_AI_SERVICE_URL || 'http://localhost:8000'
+const AI_SERVICE_URL = 'https://hirematex.onrender.com'
 
 export interface CheckoutSessionResponse {
   success: boolean
