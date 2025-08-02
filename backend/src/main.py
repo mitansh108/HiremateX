@@ -37,8 +37,15 @@ app = FastAPI(
 # Add CORS middleware to allow requests from Next.js frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Temporarily allow all origins for debugging
-    allow_credentials=False,  # Must be False when allow_origins is "*"
+    allow_origins=[
+        "http://localhost:3000",  # Local development
+        "https://hiremate-x.vercel.app",  # Current production domain
+        "https://hiremate-68eezfpda-mitansh108s-projects.vercel.app",  # Legacy production
+        "https://hirematex.vercel.app",  # Additional domain
+        "https://hirematex-git-main-mitansh108s-projects.vercel.app",  # Git branch deployment
+        "https://hirematex-mitansh108s-projects.vercel.app"  # Project deployment
+    ],
+    allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HEAD"],
     allow_headers=["*"],
 )
@@ -766,8 +773,8 @@ async def create_checkout_session(request: dict):
                 'package_name': package["name"]
             },
             mode='payment',
-            success_url='https://hiremate-68eezfpda-mitansh108s-projects.vercel.app/payments?success=true',
-            cancel_url='https://hiremate-68eezfpda-mitansh108s-projects.vercel.app/payments?canceled=true',
+            success_url='https://hiremate-x.vercel.app/payments?success=true',
+            cancel_url='https://hiremate-x.vercel.app/payments?canceled=true',
         )
         
         print(f"✅ Checkout session created: {session.id}")
