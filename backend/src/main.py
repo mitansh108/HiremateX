@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 import asyncio
 import stripe
+from datetime import datetime
 from agents.comprehensive_resume_parser import ComprehensiveResumeParser
 from agents.content_generator import ContentGeneratorAgent
 from agents.simple_credit_manager import credit_manager
@@ -36,18 +37,30 @@ app = FastAPI(
 # Add CORS middleware to allow requests from Next.js frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",  # Local development
-        "https://hiremate-68eezfpda-mitansh108s-projects.vercel.app"  # Production
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_origins=["*"],  # Temporarily allow all origins for debugging
+    allow_credentials=False,  # Must be False when allow_origins is "*"
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HEAD"],
     allow_headers=["*"],
 )
+
+# Add request logging middleware
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    print(f"🔍 {request.method} {request.url}")
+    print(f"🔍 Headers: {dict(request.headers)}")
+    
+    response = await call_next(request)
+    print(f"🔍 Response status: {response.status_code}")
+    return response
 
 # Initialize the agents
 comprehensive_parser = ComprehensiveResumeParser()  # New comprehensive parser
 content_generator = ContentGeneratorAgent()
+
+@app.options("/{full_path:path}")
+async def options_handler(full_path: str):
+    """Handle all OPTIONS requests"""
+    return {"message": "OK"}
 
 @app.get("/")
 async def root():
@@ -63,10 +76,26 @@ async def root():
 
 @app.get("/health")
 async def health_check():
+    # Test Supabase connectivity
+    supabase_status = "unknown"
+    try:
+        # Quick test of Supabase connection
+        import httpx
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            response = await client.get(
+                f"{os.getenv('SUPABASE_URL')}/rest/v1/",
+                headers={"apikey": os.getenv('SUPABASE_ANON_KEY') or os.getenv('SUPABASE_SERVICE_KEY')}
+            )
+            supabase_status = "connected" if response.status_code < 500 else "error"
+    except Exception as e:
+        supabase_status = f"error: {str(e)}"
+    
     return {
         "status": "healthy",
         "service": "ai-resume-analysis",
-        "langgraph": "operational"
+        "langgraph": "operational",
+        "supabase": supabase_status,
+        "timestamp": datetime.now().isoformat()
     }
 
 @app.post("/parse-resume-comprehensive")
@@ -514,23 +543,49 @@ async def generate_linkedin_connection_note(request: dict):
 
 
 
+@app.get("/credits/test")
+async def test_credits_system():
+    """Test the credits system connectivity"""
+    try:
+        # Test with a dummy user ID
+        result = await credit_manager.get_user_credits("test-user-123")
+        return {
+            "status": "success",
+            "message": "Credits system is working",
+            "test_result": result
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": f"Credits system error: {str(e)}",
+            "error_type": type(e).__name__
+        }
+
 @app.post("/credits/check")
 async def check_user_credits(request: dict):
     """Check user's current credit balance"""
     try:
+        print(f"🔍 Credits check request received: {request}")
+        
         user_id = request.get("user_id")
         
         if not user_id:
+            print("❌ Missing user_id in request")
             raise HTTPException(status_code=400, detail="user_id is required")
         
         print(f"💳 Checking credits for user: {user_id}")
         
         result = await credit_manager.get_user_credits(user_id)
         
+        print(f"✅ Credit check result: {result}")
         return result
         
+    except HTTPException:
+        raise
     except Exception as e:
         print(f"❌ Failed to check credits: {str(e)}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(
             status_code=500,
             detail=f"Failed to check credits: {str(e)}"

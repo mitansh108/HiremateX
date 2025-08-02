@@ -41,7 +41,11 @@ CREDIT_COSTS = {
 
 class SimpleCreditManager:
     def __init__(self):
-        self.client = httpx.AsyncClient()
+        # Configure httpx client with proper timeouts
+        self.client = httpx.AsyncClient(
+            timeout=httpx.Timeout(10.0, connect=5.0),  # 10s total, 5s connect
+            limits=httpx.Limits(max_keepalive_connections=5, max_connections=10)
+        )
     
     async def _supabase_request(self, method: str, table: str, data: Optional[Dict] = None, filters: Optional[Dict] = None):
         """Make HTTP request to Supabase REST API"""
@@ -62,6 +66,8 @@ class SimpleCreditManager:
                 url += "?" + "&".join(params)
         
         try:
+            print(f"🔗 Making {method} request to: {url}")
+            
             if method == "GET":
                 response = await self.client.get(url, headers=headers)
             elif method == "POST":
@@ -69,7 +75,17 @@ class SimpleCreditManager:
             elif method == "PATCH":
                 response = await self.client.patch(url, headers=headers, json=data)
             
+            print(f"📡 Response status: {response.status_code}")
+            if response.status_code >= 400:
+                print(f"❌ Response error: {response.text}")
+            
             return response
+        except httpx.TimeoutException as e:
+            print(f"⏰ Supabase request timeout: {e}")
+            return None
+        except httpx.ConnectError as e:
+            print(f"🔌 Supabase connection error: {e}")
+            return None
         except Exception as e:
             print(f"❌ Supabase request failed: {e}")
             return None
