@@ -4,6 +4,7 @@
  */
 
 const AI_SERVICE_URL = 'https://hirematex.onrender.com'
+console.log('🔧 AI_SERVICE_URL:', AI_SERVICE_URL)
 
 export interface CreditInfo {
   success: boolean
@@ -358,4 +359,4 @@ export async function generateLinkedInDMWithCredits(
     console.error('LinkedIn DM generation failed:', error)
     throw error
   }
-}
+}// Force redeploy
