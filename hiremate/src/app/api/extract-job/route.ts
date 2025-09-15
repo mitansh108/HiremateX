@@ -169,6 +169,7 @@ ${content}
 - Extract ONLY technical skills that are EXPLICITLY WRITTEN in the job posting text.
 - DO NOT infer, guess, or assume implied skills. If it is not directly written, ignore it.
 - Technical skills include programming languages, frameworks, libraries, tools, databases, cloud platforms, DevOps technologies, data/AI frameworks, and mobile development technologies.
+- Do not include Generic skills such as Artificial Intelligence, Machine Learning, Data Science etc, focus on total skill words.
 - Exclude soft skills, responsibilities, or general tasks (e.g., communication, leadership, teamwork).
 - Exclude vague terms like "modern frameworks" or "latest technologies" unless a specific technology is named.
 
