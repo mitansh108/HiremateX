@@ -132,7 +132,7 @@ class ContentGeneratorAgent:
             
             # Generate content using Groq
             response = self.groq_client.chat.completions.create(
-                model="llama3-70b-8192",
+                model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.7,
                 max_tokens=1500
@@ -182,7 +182,7 @@ class ContentGeneratorAgent:
             """
             
             response = self.groq_client.chat.completions.create(
-                model="llama3-70b-8192",
+                model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": personalization_prompt}],
                 temperature=0.5,
                 max_tokens=1500
