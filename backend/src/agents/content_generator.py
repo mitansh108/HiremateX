@@ -318,104 +318,63 @@ class ContentGeneratorAgent:
         skills = resume_data.get('skills', [])
         
         return f"""
-        You are an expert cover letter writer. Write a compelling, personalized cover letter using this EXACT structure:
+You are an expert cover letter writer. Write a compelling, personalized cover letter that follows this structure naturally (without labeling sections):
 
-        MANDATORY STRUCTURE TO FOLLOW:
-        (i) Who you are, what you want, and what you believe in
-        (ii) Transition
-        (iii) Skill & Qualification Match  
-        (iv) Why do you want to work there?
-        (v) Conclusion
+STRUCTURE (must flow smoothly, not explicitly titled):
+1. Opening: Introduce who the candidate is, what they want, and what they believe in. Use concrete achievements with numbers where possible, show enthusiasm, and list three strengths that make them a perfect fit.  
+2. Transition: Smoothly lead into qualifications and experiences that support these strengths.  
+3. Skills & Qualifications: Highlight specific projects and work experience from the resume that directly match the job requirements. Use vivid examples with results and numbers.  
+4. Motivation: Explain why the candidate wants to work at the company. Reference company values, products, or recent initiatives in a personal and genuine way.  
+5. Conclusion: Confidently state fit for the role, express readiness to contribute, and end with a professional closing.  
 
-        Job Details:
-        - Role: {job_data.get('role', '')}
-        - Company: {job_data.get('company', '')}
-        - Requirements: {job_data.get('qualifications', '')}
-        - Key Skills Required: {', '.join(job_data.get('skills', [])[:10])}
-        - Company Benefits/Culture: {job_data.get('benefits', '')}
-        
-        REAL CANDIDATE DATA FROM RESUME (USE ONLY THIS DATA):
-        
-        PERSONAL INFO:
-        - Name: {resume_data.get('name', 'Not found')}
-        - Email: {resume_data.get('email', 'Not found')}
-        - Location: {resume_data.get('location', 'Not found')}
-        
-        WORK EXPERIENCE (MUST MENTION THESE SPECIFIC JOBS):
-        {self._format_work_experience(work_experience)}
-        
-        PROJECTS (MUST MENTION THESE SPECIFIC PROJECTS):
-        {self._format_projects(projects)}
-        
-        EDUCATION (MUST MENTION THIS EDUCATION):
-        {self._format_education(education)}
-        
-        TECHNICAL SKILLS (USE THESE EXACT SKILLS):
-        {self._format_skills(skills)}
-        
-        RAW RESUME TEXT FOR ADDITIONAL CONTEXT:
-        {resume_data.get('raw_text', '')[:1000]}...
+Job Details:
+- Role: {job_data.get('role', '')}
+- Company: {job_data.get('company', '')}
+- Requirements: {job_data.get('qualifications', '')}
+- Key Skills Required: {', '.join(job_data.get('skills', [])[:10])}
+- Company Benefits/Culture: {job_data.get('benefits', '')}
 
-        DETAILED WRITING INSTRUCTIONS:
+REAL CANDIDATE DATA FROM RESUME (USE ONLY THIS DATA):
 
-        (i) WHO YOU ARE, WHAT YOU WANT, AND WHAT YOU BELIEVE IN:
-        - First sentence: Summarize what you will bring to the company with SPECIFIC numbers/achievements
-        - Second sentence: Express excitement about the role and company
-        - Third sentence: "There are three things that make me the perfect fit for this position:"
-        - Avoid jargon, be specific, use numbers when possible
-        - Example format: "Over the last [time period], I've [specific achievement with numbers] and [another achievement]. I'm excited to continue my journey by contributing at {job_data.get('company', '')}."
+PERSONAL INFO:
+- Name: {resume_data.get('name', 'Not found')}
+- Email: {resume_data.get('email', 'Not found')}
+- Location: {resume_data.get('location', 'Not found')}
 
-        (ii) TRANSITION:
-        - Smoothly connect to your qualifications
-        - Set up the three main points you'll cover
+WORK EXPERIENCE (MUST MENTION THESE SPECIFIC JOBS):
+{self._format_work_experience(work_experience)}
 
-        (iii) SKILL & QUALIFICATION MATCH:
-        - WITHOUT FAIL: Highlight specific PROJECTS from resume that match job requirements
-        - WITHOUT FAIL: Highlight relevant WORK EXPERIENCE that aligns with the role
-        - Pick the 2-3 most important qualifications that match job requirements
-        - Transform boring bullet points into exciting sentences with themes like:
-          * Leading People
-          * Taking Initiative  
-          * Affinity for challenging work
-          * Dealing with failure
-          * Managing conflict
-          * Driven by curiosity
-        - Use specific examples with numbers and results
-        - Connect each qualification to a concrete project or work experience
+PROJECTS (MUST MENTION THESE SPECIFIC PROJECTS):
+{self._format_projects(projects)}
 
-        (iv) WHY DO YOU WANT TO WORK THERE:
-        - Research-based reasons (use company values, recent news, products)
-        - Format: "I've been following {job_data.get('company', '')} and I resonate with both the company's values and direction. [Specific value/aspect] stands out because [reason]. I also [mention something current about company] which appeals to me because [why]."
-        - Make it personal and genuine
+EDUCATION (MUST MENTION THIS EDUCATION):
+{self._format_education(education)}
 
-        (v) CONCLUSION:
-        - State what you want clearly
-        - Express confidence in fit
-        - Professional closing
-        - Format: "I think you'll find that my experience is a really good fit for {job_data.get('company', '')} and specifically this position. I'm ready to take my skills to the next level with your team and look forward to hearing back."
+TECHNICAL SKILLS (USE THESE EXACT SKILLS):
+{self._format_skills(skills)}
 
-        CRITICAL REQUIREMENTS:
-        1. ONLY use information provided in the REAL CANDIDATE DATA above - DO NOT make up any information
-        2. If a field shows "Not found", do not mention that aspect or make up fake data
-        3. MUST highlight specific projects from resume that relate to job requirements
-        4. MUST highlight relevant work experience with concrete examples
-        5. Use numbers and specific achievements wherever possible
-        6. Keep it to 300-400 words total
-        7. Professional but engaging tone
-        8. No generic statements - everything must be specific to this role/company
-        9. Include actual project names and work experience details from the resume
-        10. DO NOT HALLUCINATE - only use the exact data provided above
+RAW RESUME TEXT FOR ADDITIONAL CONTEXT:
+{resume_data.get('raw_text', '')[:1000]}...
 
-        Format as a proper business letter with:
-        [Today's Date]
+CRITICAL REQUIREMENTS:
+1. ONLY use information provided in the REAL CANDIDATE DATA above – no fabrication.  
+2. If a field shows "Not found", skip it.  
+3. Highlight specific projects and work experience tied to the job requirements.  
+4. Use measurable results and concrete examples whenever possible.  
+5. Keep word count between 300–400.  
+6. Maintain a professional yet engaging tone.  
+7. No generic filler – make it tailored and specific to this role and company.  
+8. Format as a business letter:
 
-        Dear Hiring Manager,
+[Today's Date]  
+Dear Hiring Manager,  
 
-        [Cover letter content following the 5-part structure]
+[Cover letter content following the structure above]  
 
-        Sincerely,
-        {resume_data.get('name', '[Your Name]')}
-        """
+Sincerely,  
+{resume_data.get('name', '[Your Name]')}
+"""
+
     
     def _get_linkedin_dm_prompt(self, state: ContentGenerationState) -> str:
         """Generate prompt for LinkedIn DM"""
