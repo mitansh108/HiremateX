@@ -209,7 +209,7 @@ Instructions:
     // 🔁 Replace Gemini with Groq call
     console.log('🤖 Sending prompt to Groq...');
     const groqResponse = await groq.chat.completions.create({
-      model: 'llama3-70b-8192', // or llama3-8b-8192 if smaller is desired
+      model: 'llama-3.1-8b-instant', // or llama3-8b-8192 if smaller is desired
       messages: [
         {
           role: 'user',
