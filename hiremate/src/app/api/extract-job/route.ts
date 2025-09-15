@@ -157,32 +157,21 @@ export async function POST(request: Request) {
       }
     }
 
-    const prompt = `
+   const prompt = `
 You are a comprehensive job posting analyzer with EXPERT-LEVEL technical skill detection capabilities. Your PRIMARY and MOST CRITICAL task is to identify ALL technical skills with 99%+ accuracy.
 
 Job posting content:
 ${content}
 
-🎯 PRIMARY MISSION - TECHNICAL SKILLS EXTRACTION (99%+ ACCURACY REQUIRED):
-Scan the ENTIRE job posting for technical skills including:
-- Programming Languages: Python, JavaScript, Java, C++, C#, Go, Rust, PHP, Ruby, Swift, Kotlin, etc.
-- Frontend: React, Angular, Vue, HTML, CSS, TypeScript, jQuery, Bootstrap, Tailwind, etc.
-- Backend: Node.js, Django, Flask, Spring, Express, FastAPI, Laravel, Rails, etc.
-- Databases: PostgreSQL, MySQL, MongoDB, Redis, Elasticsearch, Cassandra, DynamoDB, etc.
-- Cloud/DevOps: AWS, Azure, GCP, Docker, Kubernetes, Jenkins, Terraform, Ansible, etc.
-- Tools: Git, Linux, Nginx, Apache, Webpack, Babel, Jest, Pytest, etc.
-- Data/AI: Pandas, NumPy, TensorFlow, PyTorch, Spark, Hadoop, Tableau, Power BI, etc.
-- Mobile: iOS, Android, React Native, Flutter, Xamarin, etc.
 
-🧠 INTELLIGENT SKILL INFERENCE:
-Also include IMPLIED technical skills based on the role:
-- If "Full Stack Developer" → likely needs: HTML, CSS, JavaScript, Git, REST APIs
-- If "Data Scientist" → likely needs: SQL, Python/R, Statistics, Machine Learning
-- If "DevOps Engineer" → likely needs: Linux, Bash, CI/CD, Monitoring tools
-- If "Frontend Developer" → likely needs: Responsive Design, Browser DevTools, NPM/Yarn
-- If mentions "APIs" → likely needs: REST, JSON, HTTP, Postman
-- If mentions "Database" → likely needs: SQL, Database Design
-- If mentions "Cloud" → likely needs: Cloud Architecture, Networking
+
+⚠️ STRICT RULES:
+- Extract ONLY technical skills that are EXPLICITLY WRITTEN in the job posting text.
+- DO NOT infer, guess, or assume implied skills. If it is not directly written, ignore it.
+- Technical skills include programming languages, frameworks, libraries, tools, databases, cloud platforms, DevOps technologies, data/AI frameworks, and mobile development technologies.
+- Exclude soft skills, responsibilities, or general tasks (e.g., communication, leadership, teamwork).
+- Exclude vague terms like "modern frameworks" or "latest technologies" unless a specific technology is named.
+
 
 Extract and return ONLY a JSON object with this structure:
 {
@@ -205,7 +194,6 @@ Instructions:
 - Include both explicitly mentioned AND logically implied technical skills
 - Return ONLY the JSON object, no additional text.
     `;
-
     // 🔁 Replace Gemini with Groq call
     console.log('🤖 Sending prompt to Groq...');
     const groqResponse = await groq.chat.completions.create({
