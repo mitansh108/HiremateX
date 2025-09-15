@@ -212,7 +212,7 @@ class AdvancedSkillMatcher:
         try:
             chat_completion = self.groq_client.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
-                model="llama3-70b-8192",  # Use larger model for better reasoning
+                model="llama-3.1-8b-instant",  # Use larger model for better reasoning
                 temperature=0.1,
                 max_tokens=1500
             )
