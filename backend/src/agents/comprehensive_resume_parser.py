@@ -139,7 +139,7 @@ class ComprehensiveResumeParser:
             # Use Groq for comprehensive parsing
             response = await asyncio.to_thread(
                 self.groq_client.chat.completions.create,
-                model="llama3-70b-8192",
+                model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.1,
                 max_tokens=2000
